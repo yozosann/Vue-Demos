@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="example">
+         <p> {{ todo.split('').reverse().join('') }} </p>
+         <input :disabled = 'seen' type="radio" />
+         <p> {{ goodName | capitalize | plusSB }} </p>
+         <button @click = 'sayYes'>sayYes</button>
+   </div>
+    <script>
+        var vm1 = new Vue({
+            el: '#example',
+            data: {
+                todo: "go yoko's home",
+                seen: true,
+                goodName: 'yozo'
+            },
+            filters: {
+                capitalize(value) {
+                    if (!value) return ''
+                    value = value.toString();
+                    return value.charAt(0).toUpperCase() + value.slice(1)
+                },
+                plusSB(value){
+                    return value + ' is SB.';
+                }
+            },
+            methods: {
+                sayYes(){
+                    console.log('Yes');
+                }
+            }
+        })
+    </script>
+</body>
+</html>

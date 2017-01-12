@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="example">
+         <p> {{ reversedTodo }} </p>
+         <button @click = 'change'>change</button>
+
+         <p> {{ firstName }} </p>
+         <p> {{ lastName }} </p>
+         <p> {{ fullName }} </p>
+   </div>
+    <script>
+        var vm1 = new Vue({
+            el: '#example',
+            data: {
+                todo: "go yoko's home",
+                firstName: 'Chen',
+                lastName: 'Yelin'
+            },
+            methods: {
+                change(){
+                    this.todo = '221';
+                }
+            },
+            computed: {
+                reversedTodo(){
+                    return this.todo.split('').reverse().join('');
+                },
+                fullName: {
+                    get(){
+                        return this.firstName + ' ' + this.lastName;  
+                    },
+                    set(val){
+                        var names = val.split(' ');
+                        this.firstName = names[0];
+                        this.lastName = names[1];
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

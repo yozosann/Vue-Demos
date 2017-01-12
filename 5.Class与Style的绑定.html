@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        .static {
+            height: 20px;
+            width: 60px;
+            padding: 0;
+            margin: 0;
+            border: 1px solid white;
+            background-color: lightblue;
+        }
+        .active {
+            border-color: red;
+        }
+        .opacity {
+            opacity: 0.7;
+        }
+    </style>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="example">
+        <div class = "static" :class = "{ active: isActive, opacity:isOpacity }"></div>
+        <br />
+        <button @click = "activeChange">active</button>
+        <button @click = "opacityChange">opacity</button>
+    </div>
+    
+    <script>
+        var vm1 = new Vue({
+            el: '#example',
+            data: {
+                isActive: false,
+                isOpacity: false,
+                activeFlag:true,
+                opacityFlag:true,
+            },
+            methods: {
+                activeChange(){
+                    if(this.activeFlag){
+                        this.isActive = true;
+                        this.activeFlag = false;
+                    }else{
+                        this.isActive = false;
+                        this.activeFlag = true;
+                    }      
+                },
+                opacityChange(){
+                    if(this.opacityFlag){
+                        this.isOpacity = true;
+                        this.opacityFlag = false;
+                    }else{
+                        this.isOpacity = false;
+                        this.opacityFlag = true;
+                    }    
+                }
+            }
+        })
+    </script>
+</body>
+</html>
