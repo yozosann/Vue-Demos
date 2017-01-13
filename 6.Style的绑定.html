@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        .static {
+            height: 20px;
+            width: 60px;
+            padding: 0;
+            margin: 0;
+            border: 1px solid white;
+            background-color: lightblue;
+        }
+    </style>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="example">
+        <div class = "static" :style = "{ borderColor: activeColor, opacity: OpacityNum }"></div>
+        <div class = "static" :style = "styleObject"></div>
+        <div class = "static" :style = "[styleObject,styleObject2]"></div>
+        <br />
+    </div>
+
+    <script>
+        //同样适用于属性Class上,属性名也可以是驼峰式
+        var vm1 = new Vue({
+            el: '#example',
+            data: {
+                activeColor: 'red',
+                OpacityNum: 0.5,
+                styleObject2:{
+                    marginTop: '200px',
+                    width: '150px'
+                }
+            },
+            computed: {
+                styleObject(){
+                    return {
+                        opacity: this.OpacityNum * this.OpacityNum,
+                        borderColor: this.activeColor == 'red' ? 'yellow' : 'black'
+                    }
+                }
+            }
+        })
+
+        //
+    </script>
+</body>
+</html>

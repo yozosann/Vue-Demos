@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        .static {
+            height: 20px;
+            width: 60px;
+            padding: 0;
+            margin: 0;
+            border: 1px solid white;
+            background-color: lightblue;
+        }
+    </style>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="example">
+        <div class = "static" v-if = "a"></div>
+        <template v-else-if = "b">
+            <h1>123B</h1>
+        </template>
+        <template v-else>
+            <h1>CCC</h1>
+        </template>
+        <br />
+        <template v-if="loginType === 'username'">
+            <label>Username</label>
+            <input placeholder="Enter your username" key="username-input">
+        </template>
+        <template v-else>
+            <label>Email</label>
+            <input placeholder="Enter your email address" key="email-input">
+        </template>
+
+        <div class="static" v-show="ok"></div>
+    </div>
+
+    <script>
+        var vm1 = new Vue({
+            el: '#example',
+            data: {
+                a:true,
+                b:true,
+                loginType:"username",
+                ok:true
+            }
+        });
+    </script>
+</body>
+</html>

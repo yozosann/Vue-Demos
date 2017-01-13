@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        .static {
+            height: 20px;
+            width: 60px;
+            padding: 0;
+            margin: 0;
+            border: 1px solid white;
+            background-color: lightblue;
+        }
+    </style>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="example">
+        <ul>
+            <li v-for="item in items">
+                {{ item }}
+            </li>
+            <li v-for="(item,index) in items">
+                {{ index }} - {{ item }}
+            </li>
+            <li v-for="(item,key,index) in obj">
+                {{ index }} - {{ key }}:{{ item }}
+            </li>
+            <span v-for="item of num"> x </span>
+            <li v-for="item in otherItems">
+                {{ item }}
+            </li>
+        </ul>
+        <button @click="reverse">reverse</button>
+        <button @click="push">push</button>
+        <button @click="filterNoOther">filterNoOther</button>
+    </div>
+
+    <script>
+        //of 和 in 都可以
+        var vm1 = new Vue({
+            el: '#example',
+            data: {
+                items:[
+                    "abc","def","ghi","jkl"
+                ],
+                obj:{
+                    FirstName: 'John',
+                    LastName: 'Doe',
+                    Age: 30
+                },
+                num:3
+            },
+            methods:{
+                reverse(){
+                    this.items.reverse();
+                },
+                push(){
+                    this.items.push('other');
+                },
+                filterNoOther(){
+                    this.items = this.items.filter(function(value){
+                        return value.indexOf('o') < 0
+                    })
+                }
+            },
+            computed:{
+                otherItems(){
+                    return this.items.slice(2);
+                }
+            }
+        });
+
+        //
+    </script>
+</body>
+</html>
