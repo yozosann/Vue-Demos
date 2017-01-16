@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="example">
+        ex1:
+        <input type="text" placeholder="edit me" v-model="message1" />
+        <p> {{ message1 }} </p>
+        ex2:<input type="checkbox" id="checkbox" v-model="checked" />
+        <label for="checkbox">{{ checked }}</label>
+        <br>
+        ex3:<input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+        <label for="jack">Jack</label>
+        <input type="checkbox" id="john" value="John" v-model="checkedNames">
+        <label for="john">John</label>
+        <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+        <label for="mike">Mike</label>
+        <br>
+        <span>Checked names: {{ checkedNames }}</span>
+        <br>
+        ex4:<input type="radio" id="one" value="One" v-model="picked">
+        <label for="one">One</label>
+        <input type="radio" id="two" value="Two" v-model="picked">
+        <label for="two">Two</label>
+        <br>
+        <span>Picked: {{ picked }}</span>
+        <br>
+        <select v-model="selected">
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+        </select>
+        <span>selected: {{ selected }}</span>
+        <br>
+        <select v-model = "selectItem">
+            <option v-for="item in options" v-bind:value = "item.value">
+                {{ item.text }}
+            </option>
+        </select>
+        <span>selected-value: {{ selectItem }}</span>
+        <br>
+        <!-- 当选中时，`picked` 为字符串 "a" -->
+        <input type="radio" v-model="picked2" value="a">
+        <br>
+        <input
+        type="checkbox"
+        v-model="toggle"
+        v-bind:true-value="a"
+        v-bind:false-value="b"
+        >
+        <span> {{ toggle }} </span>
+        <br />
+        <input type="text" v-model="inputValue1" /><span>No Lazy: {{ inputValue1 }} </span>
+        <br />
+        <input type="text" v-model.lazy="inputValue2" /><span>Lazy: {{ inputValue2 }} </span>
+        <br />
+        <input type="text" v-model="inputValue3" /><span>No Number: {{ inputValue3 + inputValue3 }} </span>
+        <br />
+        <input type="text" v-model.number="inputValue4" /><span>Number: {{ inputValue4 + inputValue4 }} </span>
+    </div>
+
+    <script>
+        //of 和 in 都可以
+        var vm1 = new Vue({
+            el: '#example',
+            data: {
+                message1: '',
+                checked: false,
+                checkedNames: [],
+                picked:'',
+                picked2:'',
+                selected:'',
+                options:[
+                    { text: 'One', value: 'A' },
+                    { text: 'Two', value: 'B' },
+                    { text: 'Three', value: 'C' }
+                ],
+                selectItem:'A',
+                toggle:null,
+                a:1000,
+                b:9000,
+                inputValue1:'',
+                inputValue2:'',
+                inputValue3:0,
+                inputValue4:0
+            }
+        });
+
+        //
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="example">
+        <p> {{ total }} </p>
+        <button-counter @increment = "incrementTotal"></button-counter>
+        <button-counter @increment = "incrementTotal"></button-counter>
+        <br />
+        <br />
+        <currency-input v-model="price"></currency-input>
+    </div>
+    <script>
+        Vue.component('buttonCounter', {
+            template: '<button @click = increment > {{ counter }} </button>',
+            data(){
+                return {
+                    counter: 0
+                }
+            },
+            methods: {
+                increment(){
+                    this.counter ++;
+                    this.$emit('increment');
+                }
+            }
+        });
+
+        Vue.component('currency-input',{
+            template: `\
+            <span>\
+              $\
+              <input\
+                ref="input"\
+                :value = "value"\
+                v-on:input = "updateValue($event.target.value)"\
+              >\
+              </span>\
+            `,
+            props: ['value'],
+            methods: {
+                updateValue(value){
+                    //去空格并保留两位小数
+                    var formattedValue = value.trim();
+                    if(value.indexOf('.') + 1 != 0){
+                        formattedValue = formattedValue.slice(0,value.indexOf('.') + 3);
+                    }
+                    //如果值不同意 手动覆盖
+                    if(formattedValue !== value){
+                        this.$refs.input.value = formattedValue;
+                    }
+                    this.$emit('input', Number(formattedValue));
+                }
+            }
+        })
+
+        var example = new Vue({
+            el:'#example',
+            data: {
+                total:0,
+                price:''
+            },
+            methods: {
+                incrementTotal(){
+                    this.total ++;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
