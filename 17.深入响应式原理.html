@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="example">
+        {{ obj1 }}
+        <br />
+        <br />
+        <com></com>
+    </div>
+    
+    <script>
+        Vue.component('com',{
+            template:'<span @click = "updateMessage"> {{ message }} </span>',
+            data:function(){
+                return{
+                    message:'not updated'
+                }
+            },
+            methods:{
+                updateMessage(){
+                    this.message = 'updated';
+                    console.log(this.$el.textContent);
+                    this.$nextTick(function(){
+                        console.log(this.$el.textContent);
+                    })
+                }
+            }
+        })
+
+        var example = new Vue({
+            el:'#example',
+            data:{
+                obj1: {
+                    a:1,
+                    b:2
+                },
+            },
+            created(){
+                // this.$set(this.obj1, 'a' ,2);
+                //添加属性
+                this.obj1 = Object.assign({},this.obj1,{c:3});
+            }
+        })
+        
+    </script>
+</body>
+</html>

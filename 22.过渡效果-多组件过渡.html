@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <style>
+        .bounce-enter-active {
+            animation: bounce-in .8s;
+        }
+        .bounce-leave-active {
+            animation: bounce-out .8s;
+        }
+        @keyframes bounce-in {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.5);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        @keyframes bounce-out {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.5);
+            }
+            100% {
+                transform: scale(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="example">
+        <button @click = "changeView">changeView</button>
+        <br />
+        <transition name = "bounce" mode = "out-in">
+            <component :is = "view"></component>
+        </transition>
+    </div>
+    
+    <script>
+        var example = new Vue({
+            el:'#example',
+            data:{
+                view:'true'
+            },
+            methods:{
+                changeView(){
+                    if(this.view == 'true'){
+                        this.view = 'false';
+                    }else{
+                        this.view = 'true';
+                    }
+                }
+            },
+            components:{
+                'false':{
+                    template: '<p>I am false</p>'
+                },
+                'true':{
+                    template: '<p>I am true</p>'
+                }
+            }
+        })
+        
+    </script>
+</body>
+</html>

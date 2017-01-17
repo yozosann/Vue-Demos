@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <style>
+        .bounce-enter-active {
+            animation: bounce-in .8s;
+        }
+        .bounce-leave-active {
+            animation: bounce-out .8s;
+        }
+        @keyframes bounce-in {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.5);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        @keyframes bounce-out {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.5);
+            }
+            100% {
+                transform: scale(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="example">
+        <br />
+        <transition name = "bounce" mode = "out-in">
+            <button v-if="show" @click = "changeShow" :key = "myKey">on</button>
+            <button else @click = "changeShow" :key = "myKey">off</button>
+        </transition>
+    </div>
+    
+    <script>
+        var example = new Vue({
+            el:'#example',
+            data:{
+                show:true
+            },
+            methods:{
+                changeShow(){
+                    if(this.show){
+                        this.show = false;
+                    }else{
+                        this.show = true
+                    }
+                }
+            },
+            computed:{
+                myKey(){
+                    return this.show ? 'on' : 'off'
+                }
+            }
+        })
+        
+    </script>
+</body>
+</html>
