@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        .static {
+            height: 60px;
+            width: 60px;
+            padding: 0;
+            margin: 0;
+            border: 1px solid white;
+            background-color: lightblue;
+        }
+    </style>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="example">
+        <button @click="say('hi')">sayHi</button>
+        <button @click="plus">plus one</button>
+        <div> {{ count }} </div>
+        <div class="static" @click = "parent"> 
+            <div @click.stop = "child" style = "width: 30px; height: 30px; background-color: red"></div>
+        </div>
+        <button @click = "alertMytagname('$event')">$event</button>
+        <input @keydown.left = "alertLeft"></div>
+    </div>
+
+    <script>
+        //of 和 in 都可以
+        var vm1 = new Vue({
+            el: '#example',
+            data: {
+                count: 3
+            },
+            methods:{
+                say(something){
+                    alert(something);
+                },
+                plus(){
+                    this.count ++;
+                },
+                parent(){
+                    alert('parent');
+                },
+                child(){
+                    alert('child')
+                },
+                alertMytagname(){
+                    alert(event.target.tagName);
+                },
+                alertLeft(){
+                    alert('left');
+                }
+            },
+            computed:{
+            }
+        });
+
+        //
+    </script>
+</body>
+</html>
