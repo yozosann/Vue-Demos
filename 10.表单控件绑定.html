@@ -3,33 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-<<<<<<< HEAD
-    <style type="text/css">
-        .static {
-            height: 60px;
-            width: 60px;
-            padding: 0;
-            margin: 0;
-            border: 1px solid white;
-            background-color: lightblue;
-        }
-    </style>
-=======
->>>>>>> origin/master
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
 </head>
 <body>
     <div id="example">
-<<<<<<< HEAD
-        <button @click="say('hi')">sayHi</button>
-        <button @click="plus">plus one</button>
-        <div> {{ count }} </div>
-        <div class="static" @click = "parent"> 
-            <div @click.stop = "child" style = "width: 30px; height: 30px; background-color: red"></div>
-        </div>
-        <button @click = "alertMytagname('$event')">$event</button>
-        <input @keydown.left = "alertLeft"></div>
-=======
         ex1:
         <input type="text" placeholder="edit me" v-model="message1" />
         <p> {{ message1 }} </p>
@@ -84,7 +61,6 @@
         <input type="text" v-model="inputValue3" /><span>No Number: {{ inputValue3 + inputValue3 }} </span>
         <br />
         <input type="text" v-model.number="inputValue4" /><span>Number: {{ inputValue4 + inputValue4 }} </span>
->>>>>>> origin/master
     </div>
 
     <script>
@@ -92,31 +68,6 @@
         var vm1 = new Vue({
             el: '#example',
             data: {
-<<<<<<< HEAD
-                count: 3
-            },
-            methods:{
-                say(something){
-                    alert(something);
-                },
-                plus(){
-                    this.count ++;
-                },
-                parent(){
-                    alert('parent');
-                },
-                child(){
-                    alert('child')
-                },
-                alertMytagname(){
-                    alert(event.target.tagName);
-                },
-                alertLeft(){
-                    alert('left');
-                }
-            },
-            computed:{
-=======
                 message1: '',
                 checked: false,
                 checkedNames: [],
@@ -136,7 +87,6 @@
                 inputValue2:'',
                 inputValue3:0,
                 inputValue4:0
->>>>>>> origin/master
             }
         });
 
