@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <link href="https://unpkg.com/animate.css@3.5.1/animate.min.css" rel="stylesheet" type="text/css">
+    <style>
+    </style>
+</head>
+<body>
+    <div id="example">
+        <button @click = "changeShow">change</button>
+        <br />
+        <transition 
+          name = "slide-fade" 
+          enter-active-class = "animated tada"
+          leave-active-class = "animated bounceOutRight"
+          >
+            <p v-if="show">hello</p>
+        </transition>
+    </div>
+    
+    <script>
+        var example = new Vue({
+            el:'#example',
+            data:{
+                show:true
+            },
+            methods:{
+                changeShow(){
+                    if(this.show){
+                        this.show = false;
+                    }else{
+                        this.show = true
+                    }
+                }
+            }
+        })
+        
+    </script>
+</body>
+</html>

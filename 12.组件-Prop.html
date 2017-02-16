@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="example">
+        <child message = 'first component'></child>
+        <br />
+        <input type="text" v-model="activeProp" />
+        <br />
+        <child :message = 'activeProp'></child>
+        <once-child :message = 'activeProp'></once-child>
+    </div>
+    <script>
+        Vue.component('child', {
+            props:['message'],
+            template: '<span> {{ message }} </span>',
+        });
+
+        Vue.component('onceChild', {
+            //Prop验证
+            props:{
+                message:{
+                    type:String,
+                    required: true,
+                    validator(val){
+                        return val.length < 5
+                    }
+                }
+            },
+            template: '<p> {{ computedMessage }} </p>',
+            computed:{
+                computedMessage(){
+                    return this.message.split('').reverse().join('');
+                }
+            }
+        });
+
+        new Vue({
+            el:'#example',
+            data: {
+                activeProp:''
+            }
+        })
+    </script>
+</body>
+</html>

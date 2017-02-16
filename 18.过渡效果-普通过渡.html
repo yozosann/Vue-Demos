@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <style>
+        .slide-fade-enter-active {
+            transition: all .3s ease;
+        }
+        .slide-fade-leave-active {
+            transform: translateX(10px);
+            opacity: 0;
+            transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+        }
+        .slide-fade-enter {
+            transform: translateX(10px);
+            opacity: 0;
+        }
+        .bounce-enter-active {
+            animation: bounce-in .8s;
+        }
+        .bounce-leave-active {
+            animation: bounce-out .8s;
+        }
+        @keyframes bounce-in {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.5);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        @keyframes bounce-out {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.5);
+            }
+            100% {
+                transform: scale(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="example">
+        <button @click = "changeShow">change</button>
+        <br />
+        <transition name = "slide-fade">
+            <p v-if="show">hello</p>
+        </transition>
+        <transition name = "bounce">
+            <p v-if="show">hello2 animation</p>
+        </transition>
+    </div>
+    
+    <script>
+        var example = new Vue({
+            el:'#example',
+            data:{
+                show:true
+            },
+            methods:{
+                changeShow(){
+                    if(this.show){
+                        this.show = false;
+                    }else{
+                        this.show = true
+                    }
+                }
+            }
+        })
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="example">
+        <h1>ex1:我是父组件的标题</h1>
+        <my-component>
+            <p>初始1</p>
+            <p>初始2</p>
+        </my-component>
+
+        <app-layout>
+            <h1 slot="header">ex2:Title</h1>
+            <h3>5555</h3>
+            <p slot="footer">.................</p>
+        </app-layout>
+
+        <my-awesome-list :items = "items">
+            <!-- 作用域插槽也可以在这里命名 -->
+            <template slot="item" scope="props">
+                <li class="my-fancy-item">{{ props.text }}</li>
+            </template>
+        </my-awesome-list>
+
+    </div>
+    <script>
+        Vue.component('myAwesomeList',{
+            props: ['items'],
+            template:`
+            <ul>
+            ex3:
+              <slot name="item"
+                v-for = "item in items"
+                :text = "item.text">
+              </slot>            
+            </ul>`
+        });
+
+        Vue.component('myComponent',{
+            template:`<div>\
+              <h2>我是子组件的标题</h2>\
+              <slot>\
+                只有没有内容分发时才显示\
+              </slot>\
+            </div>`
+        });
+
+        Vue.component('appLayout',{
+            template:`<div class="container">
+                        <header>
+                            <slot name="header"></slot>
+                        </header>
+                        <main>
+                            <slot></slot>
+                        </main>
+                        <footer>
+                            <slot name="footer"></slot>
+                        </footer>
+                    </div>`
+        });
+
+        var example = new Vue({
+            el:'#example',
+            data: {
+                items:[
+                    {text:'1'},{text:'2'},{text:'3'},{text:'4'}
+                ]
+            }
+        })
+    </script>
+</body>
+</html>

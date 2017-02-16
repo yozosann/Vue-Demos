@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+    <div id="example">
+        <button @click = "changeShow">change</button>
+        <br />
+        <transition 
+          @before-enter = "beforeEnter"
+          @enter = "enter"
+          @leave = "leave"
+          :css = "false"  
+        >
+            <p v-if="show">hello</p>
+        </transition>
+    </div>
+    
+    <script>
+        var example = new Vue({
+            el:'#example',
+            data:{
+                show:true
+            },
+            methods:{
+                beforeEnter: function(el){
+                    el.style.opacity = 0;
+                    el.style.transformOrigin = 'left'
+                },
+                enter: function(el,done) {
+                    Velocity(el, { opacity: 1, fontSize: '1.4em'},{ duration: 300});
+                    Velocity(el, { fontSize:'1em' }, { complete:done });
+                },
+                leave: function (el, done) {
+                    Velocity(el, { translateX: '15px', rotateZ: '50deg' }, { duration: 600 })
+                    Velocity(el, { rotateZ: '100deg' }, { loop: 2 })
+                    Velocity(el, {
+                            rotateZ: '45deg',
+                            translateY: '30px',
+                            translateX: '30px',
+                            opacity: 0
+                        }, { complete: done })
+                },
+                changeShow(){
+                    if(this.show){
+                        this.show = false;
+                    }else{
+                        this.show = true
+                    }
+                }
+            }
+        })
+        
+    </script>
+</body>
+</html>

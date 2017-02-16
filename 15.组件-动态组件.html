@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="example">
+        <component :is = "currentView"></component>
+        <br />
+        <button @click='toHome'>home</button>
+        <button @click='toPosts'>posts</button>
+        <button @click='toArchive'>archive</button>
+    </div>
+    <script>
+        var home = {
+            template: '<p>Welcome home!</p>'
+        }
+        var posts = {
+            template: '<p>Today is a good day!</p>'
+        }
+        var archive = {
+            template: '<p>Has archived!</p>'
+        }
+        var example = new Vue({
+            el:'#example',
+            data: {
+                currentView: 'home'
+            },
+            components: {
+                home,
+                posts,
+                archive
+            },
+            methods: {
+                toHome(){this.currentView = 'home'},
+                toPosts(){this.currentView = 'posts'},
+                toArchive(){this.currentView = 'archive'}
+            }
+        })
+    </script>
+</body>
+</html>
