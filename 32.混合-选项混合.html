@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="example1">   
+    </div>
+    <div id="example2">   
+    </div>
+    <script>
+        //全局混合
+        Vue.mixin({
+            created(){
+                console.log(this.abc);
+            }
+        })
+        const mixin1 = {
+            created(){
+                console.log('mixin');
+            }
+        }
+        const mixin2 = {
+            methods: {
+                foo() {
+                    console.log('foo')
+                },
+                conflicting() {
+                    console.log('from mixin')
+                }
+            },
+            data: {
+                abc: 321
+            }
+        }
+        new Vue({
+            el: '#example1',
+            mixins:[mixin1],
+            data:{
+                abc: 123
+            },
+            created(){
+                console.log('self');
+            }
+        })
+        const vm = new Vue({
+            el: '#example2',
+            mixins:[mixin2],
+            methods: {
+                bar(){
+                    console.log('bar')
+                },
+                conflicting() {
+                    console.log('from self')
+                }
+            }
+        })
+        vm.foo();
+        vm.bar();
+        vm.conflicting();
+    </script>
+</body>
+</html>
